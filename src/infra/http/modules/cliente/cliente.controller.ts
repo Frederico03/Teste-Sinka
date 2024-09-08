@@ -6,7 +6,7 @@ import {
 } from '@nestjs/common';
 import { Express } from 'express';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { CreateClienteUseCase } from 'src/modules/cliente/UseCase/createClienteUseCase';
+import { CreateClienteUseCase } from 'src/modules/cliente/UseCase/createClienteUseCase/createClienteUseCase';
 
 @Controller('cliente')
 export class ClienteController {
@@ -16,7 +16,8 @@ export class ClienteController {
   @UseInterceptors(FileInterceptor('file'))
   async createCliente(
     @UploadedFile() file: Express.Multer.File,
-  ): Promise<void> {
+  ): Promise<boolean> {
     await this.createClienteUseCase.execute(file);
+    return true;
   }
 }

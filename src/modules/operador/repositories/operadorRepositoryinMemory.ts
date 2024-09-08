@@ -4,6 +4,14 @@ import { OperadorRepository } from './operadorRepository';
 export class OperadorRepositoryinMemory implements OperadorRepository {
   public operadores: Operador[] = [];
 
+  countClientesByOperador() {
+    throw new Error('Method not implemented.');
+  }
+
+  async findAll(): Promise<Operador[]> {
+    return this.operadores;
+  }
+
   async create(operador: Operador): Promise<void> {
     this.operadores.push(operador);
   }

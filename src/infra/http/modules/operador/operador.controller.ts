@@ -14,6 +14,7 @@ import {
   Query,
 } from '@nestjs/common';
 import { OperadorBody } from './dtos/operatorBody';
+import { EditClientesUseCase } from 'src/modules/cliente/UseCase/editClientesUseCase/editClientesUseCase';
 
 @Controller('operadores')
 export class OperadorController {
@@ -23,6 +24,7 @@ export class OperadorController {
     private deleteOperadorUseCase: DeleteOperadorUseCase,
     private getOperadorUseCase: GetOperadorUseCase,
     private getManyOperadorUseCase: GetManyOperadorUseCase,
+    private editClientesUseCase: EditClientesUseCase,
   ) {}
 
   @Post()
@@ -31,6 +33,7 @@ export class OperadorController {
     const operador = await this.createOperadorUseCase.execute({
       nome,
     });
+    await this.editClientesUseCase.execute();
     return operador;
   }
 

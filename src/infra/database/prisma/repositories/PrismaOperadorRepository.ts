@@ -48,11 +48,33 @@ export class PrismaOperadorRepository implements OperadorRepository {
   }
 
   async findMany(pagina: number, paginacao: number): Promise<Operador[]> {
-    const notes = await this.prisma.operador.findMany({
+    const operadores = await this.prisma.operador.findMany({
       take: paginacao,
       skip: (pagina - 1) * paginacao,
     });
 
-    return notes.map(PrismaOperadorMapper.toDomain);
+    return operadores.map(PrismaOperadorMapper.toDomain);
+  }
+
+  async findAll(): Promise<Operador[]> {
+    const operadores = await this.prisma.operador.findMany();
+    console.log(operadores);
+    return operadores.map(PrismaOperadorMapper.toDomain);
+  }
+
+  async countClientesByOperador() {
+    const operadores = await this.prisma.operador.findMany({
+      include: {
+        _count: {
+          select: { clientes: true },
+        },
+      },
+    });
+
+    return operadores.map((op) => ({
+      operadorId: op.id,
+      nome: op.nome,
+      count: op._count.clientes,
+    }));
   }
 }

@@ -20,7 +20,31 @@ export class PrismaClienteMapper {
       criado_em,
       atualizado_em,
       id,
-      operadorId: operadorId ?? '',
+      operadorId,
     };
+  }
+
+  static toDomain({
+    nome,
+    email,
+    valor,
+    data_nascimento,
+    id,
+    criado_em,
+    atualizado_em,
+    operadorId,
+  }: ClienteRaw): Cliente {
+    return new Cliente(
+      {
+        nome,
+        email,
+        valor,
+        data_nascimento,
+        criado_em,
+        atualizado_em,
+        operadorId,
+      },
+      id,
+    );
   }
 }

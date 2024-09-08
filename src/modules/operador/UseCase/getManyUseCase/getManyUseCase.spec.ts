@@ -24,7 +24,7 @@ describe('Get many Operador', () => {
     expect(result).toEqual(testeOperadores);
   });
 
-  it('Should be able to control notes per page', async () => {
+  it('Should be able to control operadores per page', async () => {
     const testeOperadores = [...new Array(10)].map(() => makeOperador({}));
 
     operadorRepositoryinMemory.operadores = testeOperadores;

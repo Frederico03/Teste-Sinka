@@ -6,6 +6,8 @@ import { EditOperadorUseCase } from 'src/modules/operador/UseCase/editOperadorUs
 import { DeleteOperadorUseCase } from 'src/modules/operador/UseCase/deleteOperadorUseCase/deleteOperadorUseCase';
 import { GetManyOperadorUseCase } from 'src/modules/operador/UseCase/getManyUseCase/getManyUseCase';
 import { GetOperadorUseCase } from 'src/modules/operador/UseCase/getOperadorUseCase/getOperadorUseCase';
+import { EditClientesUseCase } from 'src/modules/cliente/UseCase/editClientesUseCase/editClientesUseCase';
+import { AssociateClienteOperador } from 'src/modules/services/associateClienteOperador/associateClienteOperador';
 
 @Module({
   imports: [DataBaseModule],
@@ -16,6 +18,8 @@ import { GetOperadorUseCase } from 'src/modules/operador/UseCase/getOperadorUseC
     DeleteOperadorUseCase,
     GetManyOperadorUseCase,
     GetOperadorUseCase,
+    EditClientesUseCase,
+    AssociateClienteOperador,
   ],
 })
 export class OperadorModule {}
