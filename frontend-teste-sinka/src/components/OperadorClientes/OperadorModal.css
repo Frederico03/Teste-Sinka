@@ -1,0 +1,54 @@
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background: white;
+  padding: 40px;
+  border-radius: 8px;
+  width: 600px;
+  max-width: 90%; 
+  max-height: 80vh; 
+  position: relative;
+  overflow: hidden; 
+}
+
+.modal-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  border: none;
+  background: transparent;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.modal-close:hover {
+  color: red; 
+}
+
+.list-clientes {
+  max-height: 60vh; 
+  overflow-y: auto; 
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.list-clientes li {
+  padding: 10px;
+  border-bottom: 1px solid #000000;
+  cursor: pointer;
+}
+
+.list-clientes li:hover {
+  background-color: #f0f0f0;
+}

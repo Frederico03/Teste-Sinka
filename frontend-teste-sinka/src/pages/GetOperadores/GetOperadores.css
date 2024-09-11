@@ -1,0 +1,46 @@
+.list-operadores {
+  position: relative;
+  background-color: #fff;
+  padding: 0;
+  justify-content: space-between;
+  width: 50vw;
+  overflow: hidden;
+  list-style: none;
+}
+
+.list-operadores li {
+  display: flex;
+  align-items: center; 
+  justify-content: space-between;
+  padding: 10px;
+  border-bottom: 1px solid #000000;
+  cursor: pointer;
+}
+
+.list-operadores li:hover {
+  background-color: #f0f0f0;
+}
+
+.icon-group {
+  display: flex;
+  gap: 10px; 
+}
+
+.icon {
+  cursor: pointer;
+  color: #333;
+}
+
+.icon.edit {
+  color: #007bff; 
+}
+
+.icon.delete {
+  color: #dc3545;
+}
+
+.list-operadores h2 {
+  flex-grow: 1; 
+  margin: 0;
+  padding-left: 10px; 
+}

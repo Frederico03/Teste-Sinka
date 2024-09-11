@@ -1,0 +1,44 @@
+.editOperadorForm {
+  position: relative;
+  background-color: #fff;
+  padding: 0;
+  overflow: hidden;
+  list-style: none;
+  text-align: center; 
+  
+}
+
+.editOperadorForm input {
+  background-color: transparent;
+  padding: 1rem;
+  border: 0.1rem solid #000000;
+  border-radius: 0.4rem;
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.edit-button {
+  background-color: #40ff00;
+  color: rgb(0, 0, 0);
+  padding: 1rem;
+  border: none;
+  border-radius: 0.4rem;
+  font-size: 1rem;
+  cursor: pointer;
+  display: block;
+  margin-left: auto;
+  margin-right: auto; 
+}
+
+.success-message {
+  color: #28a745;
+  text-align: center;
+}
+
+.error-message {
+  color: #dc3545;
+  text-align: center;
+}
