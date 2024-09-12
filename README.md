@@ -156,21 +156,21 @@ Posso adicionar Operadores, tratando dados de envio e criando reações para log
 
 Aba Inicial
 
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+![App Screenshot](https://github.com/Frederico03/Teste-Sinka/blob/main/images/WhatsApp%20Image%202024-09-12%20at%2017.57.14.jpeg)
 
 Aba para criação de operadores
 
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+![App Screenshot](https://github.com/Frederico03/Teste-Sinka/blob/main/images/WhatsApp%20Image%202024-09-12%20at%2017.55.56.jpeg)
 
 Aqui posso editar meus operadores e deletá-los. Ao deletar um operador eu reordeno em ordem de criação meus clientes para vincularem em ordem de criação aos meus operadores, fazendo uma distribuição sequencial. Ao clicar em um operador, visualizo os clientes relacionados a ele.
 
 Aba para visualização, deleção e edição de operadores.
 
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+![App Screenshot](https://github.com/Frederico03/Teste-Sinka/blob/main/images/WhatsApp%20Image%202024-09-12%20at%2017.56.46.jpeg)
 
 Aba para visualização de clientes relacionados ao Id de um operador.
 
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+![App Screenshot](https://github.com/Frederico03/Teste-Sinka/blob/main/images/a1725cc7-6214-45d8-a408-e7c12a30afbc.jpg)
 
 Ao inserir o documento csv que espera o padrão:
 nome, nascimento, valor, email
@@ -178,14 +178,14 @@ Cliente 01, 25/05/1985, 042.42, cliente01@teste.com.br, eu manipulo e gravo linh
 
 Aba para inserir documento csv
 
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+![App Screenshot](images/0bea476d-69f3-4f5d-a20c-20d79a6b752a.jpg)
 
 Posso também exportar todos os clientes do banco de dados em formato csv, retornando no mesmo formato que é recebido, porém em ordem de criação no banco. Além disso posso fazer a deleção de todos clientes de uma vez.
 ## Deploy
 
 Para fazer o deploy desse projeto gerei arquivos de DockerFile, com a intenção de criar um Docker Compose e rodar em cloud, porém minha host não permitia a criação de um Docker Compose para rodar minha aplicação, mesmo funcionando tive que abrir mão do meu container. Assim realizei o deploy na Heroku fazendo adições em meus arquivos e utilizando a CLI da Heroku, criando duas aplicações uma para sustentar o backend e outra para o frontend. Quem sabe esse docker sirva para algo futuramente rsrs. 
 
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+![App Screenshot](images/62288564-154e-4ea3-8746-4d4efea3a31a.jpg)
 
 
 ## Conclusão
