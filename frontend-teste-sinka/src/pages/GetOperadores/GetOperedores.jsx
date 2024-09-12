@@ -8,7 +8,9 @@ import { MdHome, MdEdit, MdDelete } from 'react-icons/md';
 import OperadorClientes from '../../components/OperadorClientes/OperadorClientes'
 import OperadorEdit from '../../components/OperadorEdit/OperadorEdit'
 import OperadorDelete from '../../components/OperadorDelete/OperadorDelete'
-import loadingGif from "../../assets/media/loading.gif"
+import Loading from '../../components/Loading/Loading'
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ITEMS_PER_PAGE = 5;
 
@@ -21,6 +23,15 @@ function GetOperedores() {
   const [selectedOperator, setSelectedOperator] = useState(null);
   const [editOperador, setEditOperador] = useState(null);
   const [deleteOperador, setDeleteOperador] = useState(null);
+  const [success, setSucess] = useState(false)
+
+  const toastOptions = {
+    position: "top-right",
+    autoClose: 8000,
+    pauseOnHover: true,
+    draggable: true,
+    theme: "light",
+  }
 
   const fetchData = async () => { 
     setLoading(true);
@@ -71,16 +82,40 @@ function GetOperedores() {
     setSelectedOperator(null);
     setDeleteOperador(null);
     setEditOperador(null);
+    setSucess(null)
   };
 
   const handleEditSuccess = () => {
     closeModal();
     fetchData();
+    toast.success("Operador editado!",
+      toastOptions
+    )
+    setSucess(true)
+  };
+
+  const handleEditError = () => {
+    closeModal();
+    toast.error("Erro!",
+      toastOptions
+    )
+    setSucess(true)
   };
 
   const handleDeleteSuccess = () => {
     closeModal();
     fetchData();
+    toast.success("Operador deletado!",
+      toastOptions
+    )
+    setSucess(true)
+  };
+  const handleDeleteError = () => {
+    closeModal();
+    toast.error("Erro!",
+      toastOptions
+    )
+    setSucess(false)
   };
 
   return (
@@ -88,11 +123,6 @@ function GetOperedores() {
       <div className='header'>
         <h2>Operadores</h2>
       </div>
-      {loading ? (
-        <div className="loading-overlay">
-          <img src={loadingGif} alt="Carregando..." className="loading-gif" />
-        </div>
-      ) : (
         <ul className='list-operadores'>
           {currentItems.map(item => (
             <li key={item.id}>
@@ -104,7 +134,7 @@ function GetOperedores() {
           </li>
           ))}
         </ul>
-      )}
+      {loading && <Loading/>}
 
       <Pagination
         currentPage={currentPage}
@@ -120,11 +150,13 @@ function GetOperedores() {
         <OperadorClientes operador={selectedOperator} closeModal={closeModal} />
       )}
       {modalOpen && editOperador && (
-        <OperadorEdit operador={editOperador} closeModal={closeModal} handleEditSuccess={handleEditSuccess}/>
+        <OperadorEdit operador={editOperador} handleEditError={handleEditError} closeModal={closeModal} handleEditSuccess={handleEditSuccess}/>
       )}
       {modalOpen && deleteOperador && (
-        <OperadorDelete operador={deleteOperador} closeModal={closeModal} handleDeleteSuccess={handleDeleteSuccess}/>
+        <OperadorDelete operador={deleteOperador} closeModal={closeModal} handleDeleteError={handleDeleteError} handleDeleteSuccess={handleDeleteSuccess}/>
       )}
+
+      <ToastContainer />
     </div>
   );
 }

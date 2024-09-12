@@ -8,6 +8,22 @@ import { PrismaClienteMapper } from '../mappers/PrismaClienteMapper';
 export class PrismaClienteRepository implements ClienteRepository {
   constructor(private prisma: PrismaService) {}
 
+  async deleteMany(): Promise<void> {
+    await this.prisma.cliente.deleteMany();
+  }
+
+  async findById(id: string): Promise<Cliente | null> {
+    const cliente = await this.prisma.cliente.findUnique({
+      where: {
+        id,
+      },
+    });
+
+    if (!cliente) return null;
+
+    return PrismaClienteMapper.toDomain(cliente);
+  }
+
   async findManyById(id: string): Promise<Cliente[]> {
     const clientes = await this.prisma.cliente.findMany({
       where: {

@@ -6,6 +6,7 @@ import { FileToCliente } from 'src/modules/services/parseFileToCliente/fileToCli
 import { SortData } from 'src/modules/services/sortData/sortData';
 import { GetClientesByOperadorIdUseCase } from 'src/modules/cliente/UseCase/getClientesByOperadorIdUseCase/getClientesByOperadorIdUseCase';
 import { ParseFileToCliente } from 'src/modules/services/parseClienteToFile/parseClienteToFile';
+import { DeleteClienteUseCase } from 'src/modules/cliente/UseCase/deleteClientesUseCase/deleteClientesUseCase';
 
 @Module({
   imports: [DataBaseModule],
@@ -16,6 +17,7 @@ import { ParseFileToCliente } from 'src/modules/services/parseClienteToFile/pars
     SortData,
     GetClientesByOperadorIdUseCase,
     ParseFileToCliente,
+    DeleteClienteUseCase,
   ],
 })
 export class ClienteModule {}

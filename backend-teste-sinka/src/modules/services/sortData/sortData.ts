@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
-import { Cliente } from 'src/modules/cliente/entities/Cliente';
-import { ClienteRepository } from 'src/modules/cliente/repositories/clienteRepository';
-import { Operador } from 'src/modules/operador/entities/Operador';
-import { OperadorRepository } from 'src/modules/operador/repositories/operadorRepository';
+import { Cliente } from '../../cliente/entities/Cliente';
+import { ClienteRepository } from '../../cliente/repositories/clienteRepository';
+import { Operador } from '../../operador/entities/Operador';
+import { OperadorRepository } from '../../operador/repositories/operadorRepository';
 
 @Injectable()
 export class SortData {

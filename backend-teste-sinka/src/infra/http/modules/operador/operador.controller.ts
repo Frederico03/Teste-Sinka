@@ -68,7 +68,6 @@ export class OperadorController {
   @Get()
   async getManyOperador() {
     const operador = await this.getManyOperadorUseCase.execute();
-
     return operador;
   }
 }

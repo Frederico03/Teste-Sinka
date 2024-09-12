@@ -1,5 +1,5 @@
 import { SortData } from '../sortData/sortData';
-import { ClienteRepository } from 'src/modules/cliente/repositories/clienteRepository';
+import { ClienteRepository } from '../../cliente/repositories/clienteRepository';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()

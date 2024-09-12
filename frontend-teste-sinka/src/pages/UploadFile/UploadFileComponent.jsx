@@ -4,11 +4,23 @@ import './UploadFileComponent.css';
 import axios from 'axios';
 import { clientes } from '../../API/ApiRoutes';
 import { Link } from 'react-router-dom'
+import Loading from '../../components/Loading/Loading';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const UploadFileComponent = () => {
   const [file, setFile] = useState(null);
   const [fileName, setFileName] = useState("Nenhum arquivo selecionado");
+  const [loading, setLoading] = useState(null);
   const inputRef = useRef(null);
+
+  const toastOptions = {
+    position: "top-right",
+    autoClose: 8000,
+    pauseOnHover: true,
+    draggable: true,
+    theme: "light",
+  }
 
   const handleFileChange = (e) => {
     const selectedFile = e.target.files[0];
@@ -19,8 +31,10 @@ const UploadFileComponent = () => {
   };
 
   const handleUpload = async (e) => {
+    setLoading(true)
     if (!file) {
-      alert("Selecione um arquivo primeiro.");
+      setLoading(false)
+      toast.error("Faça o upload de um arquivo!", toastOptions)
       return;
     }
 
@@ -33,12 +47,12 @@ const UploadFileComponent = () => {
           'Content-Type': 'multipart/form-data',
         },
       });
-      console.log(response)
-      alert('Upload realizado com sucesso!');
+      toast.success("Upload feito com sucesso!", toastOptions)
     } catch (error) {
       console.error('Erro no upload:', error);
-      alert('Falha no upload, tente novamente.');
+      toast.error("Erro no upload de arquivo!", toastOptions)
     }
+    setLoading(false)
   };
 
   return (
@@ -75,9 +89,12 @@ const UploadFileComponent = () => {
 
       <button className="sucess-button" type="button" onClick={handleUpload}>Fazer Upload
       </button>
+      
+      {loading && <Loading/>}
       <Link to="/" className='back'>
         <MdHome size={30} color="black" />
       </Link>
+      <ToastContainer/>
     </div>
   );
 };

@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { ClienteRepository } from '../../repositories/clienteRepository';
-import { SortData } from 'src/modules/services/sortData/sortData';
+import { SortData } from '../../../services/sortData/sortData';
 import { Cliente } from '../../entities/Cliente';
 
 interface GetClientesByOperadorIdRequest {

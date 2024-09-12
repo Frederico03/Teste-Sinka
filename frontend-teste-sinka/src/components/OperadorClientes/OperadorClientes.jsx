@@ -4,28 +4,30 @@ import './OperadorModal.css';
 import PropTypes from "prop-types"
 import {MdOutlineClose} from 'react-icons/md'
 import axios from 'axios';
-import { clientes } from '../../API/ApiRoutes';
-import loadingGif from "../../assets/media/loading.gif"
+import { clientes as clienteApi } from '../../API/ApiRoutes';
+import Loading from '../Loading/Loading';
 
 const OperatorModal = ({ operador, closeModal }) => {
   const [loading, setLoading] = useState(true)
   const [cliente, setCliente] = useState([])
+  const [clienteTamanho, setClienteTamanho] = useState(0)
+
 
   useEffect(() => {
     const fetchData = async () => { 
       setLoading(true);
       try {
-        const response = await axios.get(`${clientes}/${operador.id}`);
+        const response = await axios.get(`${clienteApi}/${operador.id}`);
 
-        const cliente = response.data.map(item => ({
+        const clientes = response.data.map(item => ({
           nome: item.props.nome,
           email: item.props.email,
           data_nascimento: item.props.data_nascimento,
           valor: item.props.valor,
         }));
 
-        setCliente(cliente)
-        console.log(cliente)
+        setCliente(clientes)
+        setClienteTamanho(clientes.length)
       } catch (error) {
         console.error("Erro ao carregar os dados:", error);
       }
@@ -40,11 +42,11 @@ const OperatorModal = ({ operador, closeModal }) => {
       <div className='modal-content' onClick={e => e.stopPropagation()}>
         <MdOutlineClose className='modal-close' onClick={closeModal}/>
         <ul className='list-clientes'>
-        {loading ? (
-            <div className="loading-overlay">
-            <img src={loadingGif} alt="Carregando..." className="loading-gif" />
-          </div>
-          ) : (
+          {clienteTamanho == 0 ? 
+          (
+            <h2>Nenhum Cliente Encontrado</h2>
+          ) :
+          (
             cliente.map((c, index) => (
               <li key={index}>
                 <h2>{c.nome}</h2>
@@ -53,9 +55,11 @@ const OperatorModal = ({ operador, closeModal }) => {
                 <p><strong>Valor:</strong> {c.valor}</p>
               </li>
             ))
-          )}
+            )
+          }
         </ul>
       </div>
+      {loading && <Loading/>}
     </div>,
     document.body
   );

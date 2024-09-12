@@ -1,57 +1,28 @@
 import { GetManyOperadorUseCase } from './getManyUseCase';
-import { OperadorRepositoryinMemory } from '../../repositories/operadorRepositoryinMemory';
 import { makeOperador } from '../../factories/operadorFactory';
-import { Operador } from '../../entities/operador';
+import { SortData } from '../../../services/sortData/sortData';
 
-let operadorRepositoryinMemory: OperadorRepositoryinMemory;
 let getManyOperadorUseCase: GetManyOperadorUseCase;
+let sortData: SortData;
 
 describe('Get many Operador', () => {
   beforeEach(() => {
-    operadorRepositoryinMemory = new OperadorRepositoryinMemory();
-    getManyOperadorUseCase = new GetManyOperadorUseCase(
-      operadorRepositoryinMemory,
-    );
+    sortData = {
+      sortOperadoresByCreate: jest.fn(),
+    } as any as SortData;
+
+    getManyOperadorUseCase = new GetManyOperadorUseCase(sortData);
   });
 
   it('Should be able to get many operador', async () => {
     const testeOperadores = [...new Array(10)].map(() => makeOperador({}));
 
-    operadorRepositoryinMemory.operadores = testeOperadores;
-
-    const result = await getManyOperadorUseCase.execute({ pagina: '1' });
-
-    expect(result).toEqual(testeOperadores);
-  });
-
-  it('Should be able to control operadores per page', async () => {
-    const testeOperadores = [...new Array(10)].map(() => makeOperador({}));
-
-    operadorRepositoryinMemory.operadores = testeOperadores;
-
-    const result = await getManyOperadorUseCase.execute({ pagina: '1' });
-
-    expect(result).toHaveLength(10);
-  });
-
-  it('Should be able to control operador page', async () => {
-    const testeOperadores = [...new Array(20)].map((_, index) =>
-      makeOperador({ nome: index < 10 ? 'page 1' : 'page 2' }),
+    (sortData.sortOperadoresByCreate as jest.Mock).mockResolvedValue(
+      testeOperadores,
     );
 
-    operadorRepositoryinMemory.operadores = testeOperadores;
+    const result = await getManyOperadorUseCase.execute();
 
-    let result: Operador[];
-
-    result = await getManyOperadorUseCase.execute({
-      pagina: '2',
-    });
-    expect(result[0].nome).toEqual('page 2');
-
-    result = await getManyOperadorUseCase.execute({
-      pagina: '1',
-    });
-
-    expect(result[0].nome).toEqual('page 1');
+    expect(result).toEqual(testeOperadores);
   });
 });

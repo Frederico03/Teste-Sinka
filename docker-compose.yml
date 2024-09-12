@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: ./frontend-teste-sinka
+    ports:
+      - "80:80"
+    volumes:
+      - ./frontend-teste-sinka:/app
+    depends_on:
+      - backend
+
+  backend:
+    build:
+      context: ./backend-teste-sinka
+    ports:
+      - "3001:3001"
+    volumes:
+      - ./backend-teste-sinka:/app
+    environment:
+      - NODE_ENV=production

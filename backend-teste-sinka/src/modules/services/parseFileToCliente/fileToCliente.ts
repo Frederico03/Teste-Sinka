@@ -1,6 +1,6 @@
 import { Readable } from 'stream';
 import * as csvParser from 'csv-parser';
-import { Cliente } from 'src/modules/cliente/entities/Cliente';
+import { Cliente } from '../../cliente/entities/Cliente';
 import { SortData } from '../sortData/sortData';
 import { Injectable } from '@nestjs/common';
 

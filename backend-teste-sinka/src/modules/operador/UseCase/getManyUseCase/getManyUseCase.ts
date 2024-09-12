@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { SortData } from 'src/modules/services/sortData/sortData';
+import { SortData } from '../../../services/sortData/sortData';
 
 @Injectable()
 export class GetManyOperadorUseCase {

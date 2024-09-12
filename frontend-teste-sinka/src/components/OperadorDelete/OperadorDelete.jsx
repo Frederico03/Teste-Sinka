@@ -5,9 +5,9 @@ import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import { MdOutlineClose } from 'react-icons/md';
 import './OperadorDelete.css';
-import loadingGif from "../../assets/media/loading.gif"
+import Loading from '../Loading/Loading';
 
-const OperadorDelete = ({ operador, closeModal, handleDeleteSuccess }) => {
+const OperadorDelete = ({ operador, closeModal, handleDeleteSuccess, handleDeleteError }) => {
   const [loading, setLoading] = useState(false);
   const [operadorDeletado, setOperadorDeletado] = useState(false);
   const [deleteError, setDeleteError] = useState(null);
@@ -18,11 +18,11 @@ const OperadorDelete = ({ operador, closeModal, handleDeleteSuccess }) => {
     setDeleteError(null); 
 
     try {
-      console.log(operador.id)
       await axios.delete(`${operadores}/${operador.id}`);
       setOperadorDeletado(true);
       handleDeleteSuccess()
     } catch (error) {
+      handleDeleteError()
       setDeleteError('Erro ao deletar o operador');
       console.error('Erro ao deletar o operador:', error);
     }
@@ -34,12 +34,6 @@ const OperadorDelete = ({ operador, closeModal, handleDeleteSuccess }) => {
       <div className='modal-content' onClick={e => e.stopPropagation()}>
         <MdOutlineClose className='modal-close' onClick={closeModal} />
         <div className='modal-body'>
-          {loading ? (
-            <div className="loading-overlay">
-              <img src={loadingGif} alt="Carregando..." className="loading-gif" />
-            </div>
-          ) : (
-            <>
               {operadorDeletado ? (
                 <div className='success-message'>
                   <p>Operador deletado com sucesso!</p>
@@ -56,10 +50,9 @@ const OperadorDelete = ({ operador, closeModal, handleDeleteSuccess }) => {
                   {deleteError && <p className='error-message'>{deleteError}</p>}
                 </form>
               )}
-            </>
-          )}
         </div>
       </div>
+      {loading && <Loading/>}
     </div>,
     document.body
   );

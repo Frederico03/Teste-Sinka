@@ -5,13 +5,13 @@ import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import { MdOutlineClose } from 'react-icons/md';
 import './OperadorEdit.css';
-import loadingGif from "../../assets/media/loading.gif"
-
-const OperadorEdit = ({ operador, closeModal, handleEditSuccess }) => {
+import Loading from '../Loading/Loading';
+const OperadorEdit = ({ operador, closeModal, handleEditSuccess, handeEditError }) => {
   const [loading, setLoading] = useState(false);
   const [nome, setNome] = useState(operador.nome);
   const [operadorEditado, setOperadorEditado] = useState(false);
   const [editError, setEditError] = useState(null);
+
 
   const editUser = async (e) => {
     e.preventDefault();
@@ -26,6 +26,7 @@ const OperadorEdit = ({ operador, closeModal, handleEditSuccess }) => {
       handleEditSuccess()
     } catch (error) {
       setEditError('Erro ao editar o operador');
+      handeEditError()
       console.error('Erro ao editar o operador:', error);
     }
     setLoading(false);
@@ -36,38 +37,22 @@ const OperadorEdit = ({ operador, closeModal, handleEditSuccess }) => {
       <div className='modal-content' onClick={e => e.stopPropagation()}>
         <MdOutlineClose className='modal-close' onClick={closeModal} />
         <div className='modal-body'>
-          {loading ? (
-            <div className="loading-overlay">
-              <img src={loadingGif} alt="Carregando..." className="loading-gif" />
-            </div>
-          ) : (
-            <>
-              {operadorEditado ? (
-                <div className='success-message'>
-                  <p>Operador editado com sucesso!</p>
-                  <button className="edit-button" onClick={closeModal}>
-                    Fechar
-                  </button>
-                </div>
-              ) : (
-                <form className='editOperadorForm' onSubmit={editUser}>
-                  <h2>Editar Operador</h2>
-                  <input
-                    type="text"
-                    id="nomeCliente"
-                    placeholder="Nome do cliente"
-                    value={nome}
-                    onChange={(e) => setNome(e.target.value)}
-                  />
-                  <button className="edit-button" type="submit" disabled={loading}>Editar
-                  </button>
-                  {editError && <p className='error-message'>{editError}</p>}
-                </form>
-              )}
-            </>
-          )}
+          <form className='editOperadorForm' onSubmit={editUser}>
+            <h2>Editar Operador</h2>
+            <input
+              type="text"
+              id="nomeCliente"
+              placeholder="Nome do cliente"
+              value={nome}
+              onChange={(e) => setNome(e.target.value)}
+            />
+            <button className="edit-button" type="submit" disabled={loading}>Editar
+            </button>
+            {editError && <p className='error-message'>{editError}</p>}
+          </form>
         </div>
       </div>
+      {loading && <Loading/>}
     </div>,
     document.body
   );

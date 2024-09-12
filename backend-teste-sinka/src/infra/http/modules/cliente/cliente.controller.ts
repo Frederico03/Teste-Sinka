@@ -6,12 +6,14 @@ import {
   UploadedFile,
   UseInterceptors,
   Res,
+  Delete,
 } from '@nestjs/common';
 import { Express, Response } from 'express';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { CreateClienteUseCase } from 'src/modules/cliente/UseCase/createClienteUseCase/createClienteUseCase';
 import { GetClientesByOperadorIdUseCase } from 'src/modules/cliente/UseCase/getClientesByOperadorIdUseCase/getClientesByOperadorIdUseCase';
 import { ParseFileToCliente } from 'src/modules/services/parseClienteToFile/parseClienteToFile';
+import { DeleteClienteUseCase } from 'src/modules/cliente/UseCase/deleteClientesUseCase/deleteClientesUseCase';
 
 @Controller('cliente')
 export class ClienteController {
@@ -19,6 +21,7 @@ export class ClienteController {
     private createClienteUseCase: CreateClienteUseCase,
     private getClientesByOperadorIdUseCase: GetClientesByOperadorIdUseCase,
     private parseFileToCliente: ParseFileToCliente,
+    private deleteClienteUseCase: DeleteClienteUseCase,
   ) {}
 
   @Post()
@@ -26,8 +29,7 @@ export class ClienteController {
   async createCliente(
     @UploadedFile() file: Express.Multer.File,
   ): Promise<boolean> {
-    await this.createClienteUseCase.execute(file);
-    return true;
+    return await this.createClienteUseCase.execute(file);
   }
 
   @Get(':id')
@@ -45,5 +47,10 @@ export class ClienteController {
     res.setHeader('Content-Disposition', 'attachment; filename=users.csv');
     res.send(csv);
     return csv;
+  }
+
+  @Delete()
+  async deleteOperador() {
+    await this.deleteClienteUseCase.execute();
   }
 }

@@ -4,11 +4,22 @@ import { operadores } from '../../API/ApiRoutes'
 import axios from 'axios'
 import './AddOperadores.css'
 import { MdHome } from 'react-icons/md';
+import Loading from '../../components/Loading/Loading'
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function AddOperedores() {
   const [data, setData] = useState([])
   const [loading, setLoading] = useState(false)
   const [nomeOperador, setNomeOperador] = useState(''); 
+
+  const toastOptions = {
+    position: "top-right",
+    autoClose: 8000,
+    pauseOnHover: true,
+    draggable: true,
+    theme: "light",
+  }
 
   const createOperador = async (event) => {
     event.preventDefault();
@@ -19,7 +30,15 @@ function AddOperedores() {
       });
       if(response)
       setData(response.data); 
+      toast.success(
+        "Operador criado com sucesso!",
+        toastOptions
+      )
     } catch (error) {
+      toast.error(
+        "Falha ao criar operador!",
+        toastOptions
+      )
       console.error('Erro ao adicionar o usuário:', error);
     } finally {
       setLoading(false);
@@ -42,9 +61,11 @@ function AddOperedores() {
         <button className="add-button" type="submit" disabled={loading}>Adicionar
         </button>
       </form>
+      {loading && <Loading/>}
       <Link to="/" className="back">
         <MdHome size={30} color="black" />
       </Link>
+      <ToastContainer />
     </div>
   );
 }

@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { ClienteRepository } from 'src/modules/cliente/repositories/clienteRepository';
-import { AssociateClienteOperador } from 'src/modules/services/associateClienteOperador/associateClienteOperador';
+import { ClienteRepository } from '../../repositories/clienteRepository';
+import { AssociateClienteOperador } from '../../../services/associateClienteOperador/associateClienteOperador';
 
 @Injectable()
 export class EditClientesUseCase {
@@ -13,16 +13,14 @@ export class EditClientesUseCase {
     try {
       const existeClientes = await this.clienteRepository.findAll();
 
-      if (existeClientes)
+      if (existeClientes) {
         await this.associateClienteOperador.setEditClientes(operadorId);
-
-      return true;
-    } catch (err) {
-      console.error(
-        'An error occurred while executing EditClientesUseCase:',
-        err,
-      );
+      }
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    } catch (err: any) {
+      console.log('err -->' + err);
       return false;
     }
+    return true;
   }
 }
