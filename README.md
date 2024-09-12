@@ -5,6 +5,8 @@
 
 Esse projeto foi proposto pela empresa Sinka em um desafio para uma vaga.
 
+https://blooming-peak-03537-6f136dd9b456.herokuapp.com/
+
 
 ## Stacks utilizadas
 
@@ -76,7 +78,7 @@ Já no Backend tenho essas rotas:
 * #### Retorna clientes por ID de operador
 
     ```http
-    GET /cliente/${id}
+        GET /cliente/${id}
     ```
 
     | Parâmetro   | Tipo       | Descrição                                   |
