@@ -5,11 +5,11 @@ import { ValidationPipe } from '@nestjs/common';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.enableCors({
-    origin: 'https://frontend-teste-sinka-242bd17828f2.herokuapp.com',
+    origin: 'https://blooming-peak-03537-6f136dd9b456.herokuapp.com',
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
   });
   app.useGlobalPipes(new ValidationPipe());
-  await app.listen(3001);
+  await app.listen(process.env.PORT || 3001);
 }
 bootstrap();

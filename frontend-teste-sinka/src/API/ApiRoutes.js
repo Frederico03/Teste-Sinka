@@ -1,3 +1,3 @@
-export const host = "https://backend-teste-sinka-25a8cae4ade4.herokuapp.com";
+export const host = "https://cryptic-harbor-51680-8bf19b3c791a.herokuapp.com";
 export const operadores = `${host}/operadores`
 export const clientes = `${host}/cliente`
