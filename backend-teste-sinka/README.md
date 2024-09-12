@@ -1,85 +1,192 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+<img src="https://sinkalogistica.com.br/src/wp-content/uploads/2024/08/flaicon.svg" alt="Logo" width="200"/>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+# Projeto Sinka
 
-## Description
+Esse projeto foi proposto pela empresa Sinka em um desafio para uma vaga.
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
-## Project setup
+## Stacks utilizadas
 
-```bash
-$ npm install
-```
+**Front-end:** React, CSS
 
-## Compile and run the project
+**Back-end:** Node, Nest e Prisma - MySql
 
-```bash
-# development
-$ npm run start
 
-# watch mode
-$ npm run start:dev
+## Requisitos
 
-# production mode
-$ npm run start:prod
-```
+- Utilização de GIT
+- Framework Backend e Frontend
+- Stack Recomendada
+- Node.js+MySQL+React.js
 
-## Run tests
+## Diferencial
+- Exportar dados em formato CSV
+- Disponibilizar o projeto em uma cloud para testes e nos enviar o link para utilizarmos como usuários
+- CRUD dos Operadores
+- Função para redistribuir clientes(caso mais operadores sejam adicionados após importação)
+- Testes
+
+## Core do Projeto
+
+Tendo como foco cumprir requisitos e diferenciais adotei a tecnologia Nest para fazer meu backend com um arquitetura limpa, construindo testes com Jest. Fiz uso do ORM prisma, me comunicando com um banco MySql em Cloud. Além disso, utilizei React para criar meu frontend, técnicas de componentização e estilização com CSS.
+
+Mantive minha ideia em criar o CRUD dos operadores e conseguir criar os clientes pelos arquivos de entrada, buscar clientes mediante acesso dos operadores e deletar clientes para não prejudicar o CRUD dos operadores, visto que clientes são compreendidos como chave estrangeira para o operador. 
+
+Minha relação de tabelas ilustradas pelo Prisma:
 
 ```bash
-# unit tests
-$ npm run test
+  model Operador {
+  id            String    @id
+  nome          String
+  clientes      Cliente[]
+  criado_em     DateTime
+  atualizado_em DateTime
+}
 
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+model Cliente {
+  id              String   @id
+  nome            String
+  data_nascimento DateTime
+  valor           Float
+  email           String   @unique
+  operador        Operador @relation(fields: [operadorId], references: [id])
+  operadorId      String
+  criado_em       DateTime
+  atualizado_em   DateTime
+}
 ```
 
-## Resources
+## Rotas Backend
+Já no Backend tenho essas rotas:
 
-Check out a few resources that may come in handy when working with NestJS:
+### Clientes:
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+* #### Cria um cliente
 
-## Support
+    ```http
+        POST /cliente
+    ```
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+    | Parâmetro   | Tipo       | Descrição                           |
+    | :---------- | :--------- | :---------------------------------- |
+    | `file` | `file` | **Obrigatório**. O arquivo enviado para ser processado como cliente |
 
-## Stay in touch
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+* #### Retorna clientes por ID de operador
 
-## License
+    ```http
+    GET /cliente/${id}
+    ```
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+    | Parâmetro   | Tipo       | Descrição                                   |
+    | :---------- | :--------- | :------------------------------------------ |
+    | `id`      | `string` | **Obrigatório**. O ID do operador para buscar clientes |
+
+* #### Gera e retorna um CSV de clientes (caso exista)
+
+    ```http
+        GET /cliente
+    ```
+
+
+* #### Deleta clientes (caso exista)
+
+    ```http
+        GET /cliente
+    ```
+
+### Operadores:
+
+* #### Cria um operador
+
+    ```http
+        POST /operador
+    ```
+
+    | Body   | Tipo       | Descrição                           |
+    | :---------- | :--------- | :---------------------------------- |
+    | `nome` | `string` | **Obrigatório**.  Nome do operador. |
+
+
+* #### Edita um operador
+
+    ```http
+        PUT /operador/:id
+    ```
+
+    | Parâmetro   | Tipo       | Descrição                                   |
+    | :---------- | :--------- | :------------------------------------------ |
+    | `id`      | `string` | **Obrigatório**. O ID do operador a ser editado. |
+    | `nome`      | `string` | **Obrigatório**. Novo nome do operador. |
+
+* #### Deleta um operador
+
+    ```http
+        DELETE /operador/:id
+    ```
+
+    | Parâmetro   | Tipo       | Descrição                           |
+    | :---------- | :--------- | :---------------------------------- |
+    | `id` | `string` | **Obrigatório**. O ID do operador a ser deletado. |
+
+* #### Retorna um operador por ID
+
+    ```http
+        GET /operador/:id
+    ```
+    | Parâmetro   | Tipo       | Descrição                           |
+    | :---------- | :--------- | :---------------------------------- |
+    | `id` | `string` | **Obrigatório**. O ID do operador a ser retornado. |
+
+* #### Retorna todos os operadores
+
+    ```http
+        GET /operador
+    ```
+
+## Demonstração Frontend
+E assim ficou o consumo do backend no frontend:
+
+Eu tenho aba para operadores e clientes.
+
+Posso adicionar Operadores, tratando dados de envio e criando reações para login e caso de sucesso e insucesso para todas as ações de comunicação com o backend.
+
+Aba Inicial
+
+![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+
+Aba para criação de operadores
+
+![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+
+Aqui posso editar meus operadores e deletá-los. Ao deletar um operador eu reordeno em ordem de criação meus clientes para vincularem em ordem de criação aos meus operadores, fazendo uma distribuição sequencial. Ao clicar em um operador, visualizo os clientes relacionados a ele.
+
+Aba para visualização, deleção e edição de operadores.
+
+![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+
+Aba para visualização de clientes relacionados ao Id de um operador.
+
+![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+
+Ao inserir o documento csv que espera o padrão:
+nome, nascimento, valor, email
+Cliente 01, 25/05/1985, 042.42, cliente01@teste.com.br, eu manipulo e gravo linha por linha no banco relacionando sequencialmente os clientes gerados aos meus operadores, novamente fazendo a busca de ordem de criação.
+
+Aba para inserir documento csv
+
+![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+
+Posso também exportar todos os clientes do banco de dados em formato csv, retornando no mesmo formato que é recebido, porém em ordem de criação no banco. Além disso posso fazer a deleção de todos clientes de uma vez.
+## Deploy
+
+Para fazer o deploy desse projeto gerei arquivos de DockerFile, com a intenção de criar um Docker Compose e rodar em cloud, porém minha host não permitia a criação de um Docker Compose para rodar minha aplicação, mesmo funcionando tive que abrir mão do meu container. Assim realizei o deploy na Heroku fazendo adições em meus arquivos e utilizando a CLI da Heroku, criando duas aplicações uma para sustentar o backend e outra para o frontend. Quem sabe esse docker sirva para algo futuramente rsrs. 
+
+![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+
+
+## Conclusão
+
+Por fim, após dificuldades e aprendizados conclui no dia 12/09 como proposto para encerrar o desafio, conseguindo gabaritar todos requisitos e diferenciais solicitados para o desafio, confirmando minhas habilidades e capacidades de resolver problemas e domínios de ferramentas de programação.
+
