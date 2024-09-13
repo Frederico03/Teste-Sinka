@@ -183,7 +183,9 @@ Aba para inserir documento csv
 Posso também exportar todos os clientes do banco de dados em formato csv, retornando no mesmo formato que é recebido, porém em ordem de criação no banco. Além disso posso fazer a deleção de todos clientes de uma vez.
 ## Deploy
 
-Para fazer o deploy desse projeto gerei arquivos de DockerFile, com a intenção de criar um Docker Compose e rodar em cloud, porém minha host não permitia a criação de um Docker Compose para rodar minha aplicação, mesmo funcionando tive que abrir mão do meu container. Assim realizei o deploy na Heroku fazendo adições em meus arquivos e utilizando a CLI da Heroku, criando duas aplicações uma para sustentar o backend e outra para o frontend. Quem sabe esse docker sirva para algo futuramente rsrs. 
+Para realizar o deploy deste projeto, gerei arquivos Dockerfile com o objetivo de criar um ambiente Docker Compose e executar a aplicação na nuvem. No entanto, minha hospedagem não suportava a criação de um Docker Compose para esta aplicação. Mesmo com o funcionamento local, precisei abandonar o container.
+
+Diante disso, como optei por utilizar a plataforma Heroku, realizando ajustes nos arquivos e utilizando sua interface de linha de comando eu criei duas aplicações separadas, uma para o backend e outra para o frontend. Possivelmente, os arquivos Dockerfile poderão ser reutilizados em projetos futuros. rsrs. 
 
 ![App Screenshot](images/62288564-154e-4ea3-8746-4d4efea3a31a.jpg)
 
